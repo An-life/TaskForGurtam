@@ -1,0 +1,153 @@
+@import 'src/styles/variables';
+@import 'src/styles/mixins';
+
+.container {
+  margin: 0 auto;
+  width: 100%;
+  height: auto;
+  @include flex(space-between, center, row);
+
+  @media (max-width: 800px) {
+    background-color:$color-white ;
+    margin: 0 auto;
+    width: 100vw;
+    height: 100vh;
+    @include flex(flex-start, center, column);
+    position: fixed;
+    top: 0;
+    left: -100vw;
+    z-index: 11;
+    transition: all 0.6s ease 0s;
+    transform: translateX(100%);
+  }
+}
+
+.containerClosed {
+  margin: 0 auto;
+  width: 100%;
+  height: auto;
+  @include flex(space-between, center, row);
+
+  @media (max-width: 800px) {
+    background-color: $color-white;
+    margin: 0;
+    width: 100vw;
+    height: auto;
+    @include flex(flex-start, center, column);
+    position: fixed;
+    bottom: 0;
+    top: 0;
+    left:0;
+    z-index: 11;
+    transition: all 0.6s ease 0s;
+    transform: translateX(-102%);
+  }
+}
+
+.linksWrapper {
+  @include flex(space-between, space-between, row);
+
+  @media (max-width: 800px) {
+    @include flex(flex-start, flex-start, column);
+  }
+
+  .logo {
+    margin: 5px 20px 0;
+    padding-bottom: 15px;
+
+    @media (max-width: 1059px) {
+      margin: 15px;
+    }
+
+    &:hover {
+      color: $color-black-titles;
+      border-bottom: 3px solid $color-blue;
+      padding-bottom: 12px;
+      cursor: pointer;
+    }
+  }
+
+  .link {
+    color: $color-black-text;
+    @include font(16px, 500, 16px);
+    margin: 15px 40px 0;
+    padding-bottom: 24px;
+
+    @media (max-width: 1059px) {
+      margin: 15px;
+    }
+
+    &:hover {
+      color: $color-black-titles;
+      border-bottom: 3px solid $color-blue;
+      padding-bottom: 21px;
+      cursor: pointer;
+    }
+  }
+}
+
+.orderButton {
+  background-color: $color-blue-button;
+  color: $color-white;
+  padding: 12px 18px;
+  border-radius: 8px;
+  @include font(16px, 400, 16px);
+  border: none;
+  margin-bottom: 10px;
+
+  &:hover {
+    background-color: inherit;
+    color: $color-blue-button;
+    padding: 11px 17px;
+    border: 1px solid $color-blue-button;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  @media (max-width: 800px) {
+    margin-left:-20px;
+  }
+}
+
+.burgerButton {
+  position: fixed;
+  left: 0;
+  top: 30px;
+  background-color: $color-blue-button;
+  opacity: 0.5;
+  color: $color-white;
+  padding: 10px;
+  border-radius: 0 8px 8px 0;
+  border: none;
+  z-index: 5;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 1;
+  }
+
+  @media (min-width: 801px) {
+    display: none;
+  }
+}
+
+.closeButton {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  padding: 5px;
+  background-color: initial;
+  border: none;
+  margin-left: 200px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $color-blue-button;
+    opacity: 0.5;
+    border-radius: 8px;
+  }
+
+  @media (min-width: 801px) {
+    display: none;
+  }
+}

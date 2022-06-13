@@ -1,0 +1,15 @@
+@mixin font($fontSize, $fontWeight,$line-height) {
+  font-style: normal;
+  font-family: 'Graphik LCG';
+  font-size: $fontSize;
+  font-weight: $fontWeight;
+  line-height: $line-height;
+}
+
+@mixin flex($justifyContent, $alignItems,$direction ) {
+  display: flex;
+  justify-content: $justifyContent;
+  align-items: $alignItems;
+  flex-direction: $direction;
+  flex-wrap: wrap;
+}

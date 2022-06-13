@@ -1,0 +1,13 @@
+@import 'src/styles/variables';
+@import 'src/styles/mixins';
+
+.title {
+  @include font(42px, 700, 52px);
+  color: $color-black-titles;
+  text-align: left;
+  max-width: 884px;
+
+  @media (max-width: 600px) {
+    @include font(30px, 700, 30px);
+  }
+}

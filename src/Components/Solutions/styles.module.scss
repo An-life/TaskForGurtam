@@ -1,0 +1,57 @@
+@import "src/styles/variables";
+@import "src/styles/mixins";
+
+.container {
+  width: 100%;
+  background-color: $color-light-gray;
+  margin-bottom: 120px;
+
+  .wrapper {
+    @include flex(space-between, center, row);
+    flex-wrap: nowrap;
+    max-width: 1200px;
+    margin: 0 120px;
+
+    @media (max-width: 1172px) {
+      @include flex(center, center, column);
+      margin: 0 10px;
+    }
+
+    @media (max-width: 600px) {
+      margin: 0;
+    }
+
+    .text {
+      @include font(24px, 500, 36px);
+      margin-right: 88px;
+
+      @media (max-width: 600px) {
+        @include font(20px, 500, 15px);
+        margin-right: 0px;
+      }
+    }
+  }
+
+
+  .image {
+    @media (max-width: 600px) {
+      max-width: 300px;
+    }
+
+  }
+}
+
+.deviceContainer {
+  margin: 0 auto;
+  max-width: 1200px;
+  @include flex(space-between, flex-start, row);
+
+  @media (max-width: 1240px) {
+    justify-content: space-around;
+  }
+
+  @media (max-width: 800px) {
+    @include flex(center, flex-start, row);
+  }
+}
+

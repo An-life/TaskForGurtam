@@ -1,0 +1,53 @@
+@import 'src/styles/variables';
+@import 'src/styles/mixins';
+
+.container {
+  @include flex(center, center, column);
+  @include font(20px, 500, 20px);
+  background-color: $color-black-text;
+  z-index: 20;
+
+  .input {
+    height: 50px;
+    min-width: 200px;
+    padding: 0 20px;
+    margin: 20px 10px;
+    border-radius: 8px;
+    border: none;
+
+    &:focus {
+      height: 50px;
+      min-width: 200px;
+      padding: 0 20px;
+      margin: 20px 10px;
+      border-radius: 8px;
+      @include font(15px, 500, 15px);
+    }
+
+    &::placeholder {
+      @include font(20px, 500, 20px);
+      color: $color-black-text;
+      opacity: 0.4;
+    }
+  }
+
+  .button {
+    background-color: $color-blue-button;
+    color: $color-white;
+    padding: 20px 30px;
+    border-radius: 8px;
+    @include font(20px, 400, 16px);
+    border: none;
+    margin: 20px 0;
+
+    &:hover {
+      background-color: $color-white;
+      color: $color-blue-button;
+      padding: 19px 29px;
+      border: 1px solid $color-blue-button;
+      border-radius: 8px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+  }
+}

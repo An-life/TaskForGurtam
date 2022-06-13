@@ -1,0 +1,14 @@
+@import 'src/styles/variables';
+
+.container{
+  background-color:$color-white ;
+  min-width: 100% ;
+  min-height: 100%;
+
+  .wrapper{
+    margin: 0 auto;
+    max-width: 1440px;
+  }
+}
+
+

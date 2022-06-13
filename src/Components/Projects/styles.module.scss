@@ -1,0 +1,43 @@
+@import 'src/styles/variables';
+@import 'src/styles/mixins';
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto 100px;
+  @include flex(space-between, flex-start, row);
+
+  @media (max-width: 620px) {
+    margin: 0 auto;
+    @include flex(center, center, column);
+  }
+
+  .wrapper {
+    text-align: left;
+    padding-top: 20px;
+    border-top: $color-gray 1px solid;
+    width: 255px;
+    margin: 20px;
+
+    @media (max-width: 600px) {
+      padding-top: 10px;
+      border-top: $color-gray 1px solid;
+      width: 200px;
+      margin: 10px;
+    }
+
+    .amount {
+      @include font(52px, 700, 56px);
+      color: $color-black-titles;
+      margin: 12px 0;
+      max-width: 220px;
+
+      @media (max-width: 600px) {
+        @include font(30px, 700, 30px);
+      }
+    }
+
+    .text {
+      @include font(18px, 400, 28px);
+    }
+  }
+}

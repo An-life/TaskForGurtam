@@ -1,0 +1,125 @@
+@import 'src/styles/variables';
+@import 'src/styles/mixins';
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.swiper-slide {
+  background-size: cover;
+  background-position: center;
+}
+
+.mySwiper {
+  height: 20%;
+  box-sizing: border-box;
+  padding: 10px 0;
+}
+
+.mySwiper .swiper-slide {
+  width: 25%;
+  height: 100%;
+  opacity: 1;
+}
+
+.thumb {
+  background-color: $color-white;
+  height: 56px;
+  text-align: center;
+  max-width: 220px;
+  margin-right: 20px;
+  padding: 0 16px;
+  border: 1px solid $color-gray;
+  border-radius: 8px;
+  color: $color-black-text;
+  @include font(16px, 600, 16px);
+  @include flex(center, center, column);
+
+  &:hover {
+    background-color: $color-gray;
+  }
+}
+
+.activeThumb {
+  background-color: $color-blue-button;
+  height: 56px;
+  text-align: center;
+  max-width: 220px;
+  margin-right: 20px;
+  padding: 0 16px;
+  border: none;
+  border-radius: 8px;
+  color: $color-white;
+  @include font(16px, 600, 16px);
+  @include flex(center, center, column);
+
+  &:hover {
+    background-color: $color-gray;
+    color: $color-black-text;
+  }
+}
+
+.image {
+  width: 1194px;
+  height: 714px;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  @media (max-width: 1230px) {
+    width: 850px;
+    height: 600px;
+  }
+
+  @media (max-width: 890px) {
+    width: 600px;
+    height: 310px;
+  }
+
+  @media (max-width: 650px) {
+    width: 300px;
+    height: 210px;
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto 120px;
+  @include flex(center, center, column);
+
+  @media (max-width: 650px) {
+    margin: 0 10px;
+  }
+}
+
+.scrollContainer {
+  @include flex(flex-start, flex-start, row);
+}
+
+.titleWrapper {
+  width: 100%;
+}
