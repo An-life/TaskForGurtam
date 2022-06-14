@@ -49,7 +49,7 @@ export const Spheres = () => {
                         slidesPerView: 4.5,
                     },
                 }}
-                centeredSlidesBounds={true}
+                centeredSlides={true}
                 slideToClickedSlide={true}
                 spaceBetween={10}
                 mousewheel={true}
@@ -73,18 +73,17 @@ export const Spheres = () => {
                 onSwiper={setSecondSwiper}
                 controller={{control: firstSwiper}}
                 direction={"horizontal"}
-                mousewheel={true}
-                modules={[Mousewheel, Controller]}>
+                modules={[ Controller]}>
                 {functionalOptions.map(({image, id}, index) => (
                     <SwiperSlide key={index}
                     >
                         <img src={image}
-                             className='image' onClick={() => imageClickHandler(id)}/>
+                             className='image' onClick={() => imageClickHandler(id)} alt='Скриншот'/>
                     </SwiperSlide>
                 ))}
             </Swiper>
             {imageIsOpen && <div><PopUp onClick={() => setImageIsOpen(!imageIsOpen)}><img
-                src={functionalOptions[imageId].image}/></PopUp></div>}
+                src={functionalOptions[imageId].image} alt='Скриншот'/></PopUp></div>}
         </div>
     )
-}
+};

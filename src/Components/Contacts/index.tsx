@@ -1,19 +1,37 @@
-import {useEffect, useRef, useState} from 'react';
+import {MutableRefObject, useEffect, useRef, useState} from 'react';
 
 import mapboxgl from 'mapbox-gl';
 
 import {Coordinates} from '../../types';
-import {useCountriesData} from '../../hooks/useCountryData';
-import {useCitiesData} from '../../hooks/useCitiesData';
+import {useFetch} from "../../hooks/useFeatch";
 import {useWidthScreen} from '../../hooks/useWidthScreen';
 import {useCityCoordinates} from '../../hooks/useCityCoordinates';
 import {Button} from '../common/Button';
 import {Title} from '../common/Title';
-import {LocationIcon} from '../../assets/icons/LocationIcon';
-import {mapBoxToken, mapSize, mapStyle, zoomForCity} from './constants';
+import {MapInput} from "../common/MapInput";
+import {
+    citiesDataUrl,
+    countriesDataUrl,
+    mapBoxToken,
+    mapSize,
+    mapStyle,
+    zoomForCity,
+    zoomForCountry
+} from './constants';
 
 import styles from './styles.module.scss';
 
+interface CountryData {
+    id: number;
+    name: string;
+    latitude: number;
+    longitude: number;
+}
+
+interface CityData {
+    id: number,
+    name: string
+}
 
 mapboxgl.accessToken = mapBoxToken;
 
@@ -28,76 +46,75 @@ export const Contacts = () => {
     const [blurForCountryInput, setBlurForCountryInput] = useState<any>(false);
     const [blurForCityInput, setBlurForCityInput] = useState(false);
     const [countryCoordinates, setCountryCoordinates] = useState<Coordinates | null>(null);
+    const [zoom,setZoom]=useState(zoomForCountry);
 
-    const {countriesData} = useCountriesData();
-    const {citiesData} = useCitiesData(countryId);
+    const countriesData = useFetch<CountryData[]>(countriesDataUrl);
+    const citiesData = useFetch<CityData[]>(`${citiesDataUrl}${countryId}`);
+    const {cityCoordinates, setCityCoordinates} = useCityCoordinates(city);
+
     const {deviceType} = useWidthScreen();
-    const {cityCoordinates} = useCityCoordinates(city);
 
-    const mapContainer = useRef() as React.MutableRefObject<HTMLInputElement>;
+    const mapContainer = useRef() as MutableRefObject<HTMLInputElement>;
+
+    useEffect(()=>{
+        setCity('');
+    },[country])
 
     useEffect(() => {
         const map = new mapboxgl.Map({
             container: mapContainer.current,
             style: mapStyle,
             center: [coordinates.lon, coordinates.lat],
-            zoom: zoomForCity,
+            zoom: zoom,
         })
 
-        return () => map.remove()
+        return () => map.remove();
     }, [coordinates])
 
-    const countryOnClickHandler = (id: number, latitude: number, longitude: number, name: string) => {
+    const countryOnClickHandler = (id: number, name: string) => {
+        let country = countriesData.data?.filter(country => country.id === id);
         setCountryId(id);
         setBlurForCountryInput(false);
         setCountry(name);
-        setCountryCoordinates({lon: longitude, lat: latitude})
+        country && setCountryCoordinates({lon: country[0].longitude, lat: country[0].latitude})
     }
 
-    const citiesOnClickHandler = (name: string) => {
+    const citiesOnClickHandler = (id: number, name: string) => {
         setCity(name);
         setBlurForCityInput(false);
     }
 
     const searchButtonHandler = () => {
-        if(countryCoordinates){
-            setCoordinates(countryCoordinates);
-        }else if( cityCoordinates){
+        if (cityCoordinates && country) {
             setCoordinates(cityCoordinates);
             setCountry('');
             setCity('');
+            setCountryId(null);
+            setCityCoordinates(null);
+            setZoom(zoomForCity);
+        } else if (countryCoordinates) {
+            setCoordinates(countryCoordinates);
+            setCountry('');
+            setCountryId(null);
+            setZoom(zoomForCountry);
+        } else if (city && !cityCoordinates) {
+            setCity('');
+            setCountry('');
+            setCountryId(null);
         }
     };
 
     return (
-        <div className={styles.container}>
+        <div className={styles.container} >
             <div className={styles.title}><Title title='Найти офис в своем регионе'/></div>
             <div className={styles.form}>
-                <div className={blurForCountryInput ? styles.activeInputContainer : styles.inputContainer}>
-                    <LocationIcon/>
-                    <input value={country} className={styles.input} placeholder='Выберите вашу страну'
-                           onClick={() => setBlurForCountryInput(true)}/>
-                    {blurForCountryInput && countriesData && <div className={styles.options}>
-                        {countriesData.map(({name, id, latitude, longitude}) => <button
-                            key={id}
-                            className={styles.option}
-                            onClick={() => countryOnClickHandler(id, latitude, longitude, name)}>{name}</button>)}
-                    </div>}
-                </div>
-                <div className={blurForCityInput ? styles.activeInputContainer : styles.inputContainer}>
-                    <LocationIcon/>
-                    <input className={styles.input} placeholder='Выберите вaш город' value={city}
-                           onClick={() => setBlurForCityInput(true)}/>
-                    <div className={styles.options}>
-                        {blurForCityInput && citiesData && <div className={styles.options}>
-                            {citiesData.map((name, index) => <button
-                                key={index}
-                                className={styles.option}
-                                onClick={() => citiesOnClickHandler(name)}>{name}</button>)}
-                        </div>}
-                    </div>
-                </div>
-                <Button className={styles.button} onClick={searchButtonHandler}>
+                <MapInput placeholder='Выберите вашу страну' blur={blurForCountryInput} value={country}
+                          blurHandler={() => setBlurForCountryInput(true)}
+                          data={countriesData.data ?? []} buttonHandler={countryOnClickHandler}/>
+                <MapInput placeholder='Выберите ваш город' blur={blurForCityInput} value={city}
+                          blurHandler={() => setBlurForCityInput(true)}
+                          data={citiesData.data ?? []} buttonHandler={citiesOnClickHandler}/>
+                <Button className={styles.button} onClick={searchButtonHandler} isDisabled={!country&&!!city}>
                     Найти офис
                 </Button>
             </div>

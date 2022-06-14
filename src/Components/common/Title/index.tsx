@@ -6,4 +6,4 @@ type PropsType = {
 
 export const Title = ({title}: PropsType) => {
     return (<h2 className={styles.title}>{title}</h2>)
-}
+};

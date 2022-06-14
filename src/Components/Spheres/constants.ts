@@ -39,4 +39,4 @@ export const functionalOptions = [
         title: 'Контроль качества вождения\n',
         image: MapImage,
     },
-]
+];

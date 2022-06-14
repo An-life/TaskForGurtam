@@ -1,7 +1,9 @@
+import {ReactNode} from "react";
+
 import styles from './styles.module.scss';
 
 type PropsType = {
-    children: JSX.Element;
+    children: ReactNode;
     title: string;
     text: string;
 }
@@ -13,4 +15,4 @@ export const Solution = (props: PropsType) => {
             <div className={styles.title}>{props.title}</div>
             <div className={styles.text}>{props.text}</div>
         </div>)
-}
+};

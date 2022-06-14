@@ -1,11 +1,14 @@
+import {ReactNode} from "react";
+
 type PropsType = {
-    children: string | React.ReactNode;
+    children: string | ReactNode;
     onClick?: () => void;
     className: any;
+    isDisabled?:boolean;
 }
 
-export const Button = ({children, onClick, className}: PropsType) => {
+export const Button = ({children, onClick, className, isDisabled}: PropsType) => {
     return (
-        <button onClick={onClick} className={className}>{children}</button>
+        <button onClick={onClick} className={className} disabled={isDisabled}>{children}</button>
     )
 }

@@ -32,7 +32,6 @@
     }
   }
 
-
   .image {
     @media (max-width: 600px) {
       max-width: 300px;
@@ -54,4 +53,3 @@
     @include flex(center, flex-start, row);
   }
 }
-

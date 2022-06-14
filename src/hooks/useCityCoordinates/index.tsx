@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 
-import {API_KEY} from './constants';
 import {Coordinates} from '../../types';
+import {API_KEY} from "./constants";
 
 export const useCityCoordinates = (cityName: string) => {
     const [isLoaded, setIsLoaded] = useState(false);
@@ -24,5 +24,5 @@ export const useCityCoordinates = (cityName: string) => {
             )
     }, [cityName])
 
-    return {cityCoordinates, isLoaded}
-}
+    return {cityCoordinates, setCityCoordinates, isLoaded}
+};

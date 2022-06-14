@@ -39,103 +39,24 @@
         font-weight: 500;
         cursor: pointer;
       }
-    }
 
-    .activeInputContainer {
-      margin: 5px 10px;
-      background-color: $color-white;
-      width: 400px;
-      height: 52px;
-      @include flex(center, center, row);
-      border: solid 1px $color-blue-button;
-      border-radius: 8px;
-
-      @media (max-width: 450px) {
-        margin: 5px;
-        width: 300px;
-      }
-    }
-
-    .inputContainer {
-      margin: 5px 10px;
-      background-color: $color-white;
-      width: 400px;
-      height: 52px;
-      @include flex(center, center, row);
-      border: solid 1px $color-gray;
-      border-radius: 8px;
-
-      @media (max-width: 450px) {
-        margin: 5px;
-        width: 280px;
-      }
-    }
-  }
-
-  .input {
-    margin: 0 10px;
-    border: none;
-    height: 90%;
-    width: 340px;
-    outline: none;
-    @include font(18px, 400, 20px);
-    color: $color-black-titles;
-
-    @media (max-width: 450px) {
-      margin: 0 5px;
-      border: none;
-      height: 90%;
-      width: 250px;
-      outline: none;
-      @include font(15px, 400, 15px);
-      color: $color-black-titles;
-    }
-
-    &::placeholder {
-      @include font(18px, 400, 20px);
-      color: $color-black-text;
-    }
-
-    &:focus {
-      outline: none;
-    }
-
-
-  }
-
-  .options {
-    margin: 10px auto;
-    background-color: $color-white;
-    width: 400px;
-    border-radius: 8px;
-    max-height: 250px;
-    overflow-y: auto;
-    z-index: 10;
-    @include flex(flex-start, flex-start, column);
-
-    .option {
-      background-color: $color-white;
-      width: 100%;
-      min-height: 44px;
-      color: $color-black-titles;
-      padding: 12px 10px;
-      @include font(18px, 400, 20px);
-      border: none;
-      text-align: left;
-
-      &:hover {
-        background-color: $color-light-gray;
+      &:disabled {
+        background-color: $color-gray;
         color: $color-blue-button;
+        padding: 16px 28px;
+        border: 1px solid $color-light-gray;
+        border-radius: 8px;
+        font-weight: 500;
         cursor: pointer;
       }
     }
-  }
 
-  .mapContainer {
-    position: absolute;
+    .mapContainer {
+      position: absolute;
 
-    @media (max-width: 1200px) {
-      position: static;
+      @media (max-width: 1200px) {
+        position: static;
+      }
     }
   }
-};
+}
